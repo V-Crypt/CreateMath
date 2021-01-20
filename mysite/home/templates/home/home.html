@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h2>Información del evento y los horarios o así</h2>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">hora</th>
+                <th scope="col">nombre del evento</th>
+                <th scope="col">quien dirige</th>
+                <th scope="col">lugar</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in "012345678901234567890123456789"|make_list %}
+                <tr>
+                    <th scope="row">{{i}}</th>
+                    <td>discurso{{i}}</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">{{i}}</th>
+                    <td>discurso{{i}}+0.33</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">{{i}}</th>
+                    <td>discurso{{i}}.667</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %}

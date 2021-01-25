@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     escuela = models.CharField(max_length=128)
-    primaria_o_secundaria = models.IntegerField()
+    secundaria = models.BooleanField(default=False)
     grado = models.IntegerField()
     estatus_de_inscripcion = models.IntegerField(default=0)
 

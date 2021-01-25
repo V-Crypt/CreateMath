@@ -2,11 +2,27 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    {{ studentForm.as_p }}
-    <input type="submit" value="Sign up">
-</form>
-<p>Ya tienes una cuenta?<a href="{% url 'home:login' %}?next={% url 'home:home' %}"> Login</a></p>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        {{ studentForm | crispy }}
+        <input type="submit" value="Submit">
+    </form>
+    <p>Ya tienes una cuenta?<a href="{% url 'home:login' %}?next={% url 'home:home' %}"> Login</a></p>
+
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $("#id_secundaria").change(function() {
+            if ($("#id_secundaria option:selected").val() == "True") {
+                $("#id_grado").attr("max", 3)
+            } else {
+                $("#id_grado").attr("max", 6)
+            }
+        })
+    })
+</script>
 {% endblock %}

@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
-
+from .models import GRUPO_POR_GRADO
 from .forms import *
 # Create your views here.
 class Home(TemplateView):
@@ -29,20 +29,10 @@ def sign_up(request):
             student = studentForm.save(commit=False)
             student.user = user
             student.save()
+            grupo, b = Group.objects.get_or_create(name=GRUPO_POR_GRADO[student.grado])
+            grupo.user_set.add(user)
             login(request,user)
             return redirect('home:home')
     
     context = {"form": form, "studentForm": studentForm}
     return render(request,'registration/sign_up.html',context)
-
-# def student_details(request):
-#     context = dict()
-#     form = StudentRegistrationForm(request.POST or None)
-    
-#     if request.method == "POST":
-#         if form.is_valid():
-#             user = request.user
-#             form.save()
-#             return redirect('home:home')
-#     context['form']=form
-#     return render(request,'registration/sign_up.html',context)

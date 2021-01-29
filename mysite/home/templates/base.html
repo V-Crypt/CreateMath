@@ -8,12 +8,12 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-        <title>{% block title %}My amazing site{% endblock %}</title>
+        <title>{% block title %}Olimpiada{% endblock %}</title>
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
     {% block navbar %}
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Olimpiada CreateMath</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -22,30 +22,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav" id="navbarNav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'home:home' %}">Inicio</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home:logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'home:logout' %}">Salir</a>
                 </li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'home:login' %}?next={% url 'home:home' %}">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'home:sign-up' %}">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home:login' %}?next={% url 'home:home' %}">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home:sign-up' %}">Registro</a></li>
                 {% endif %}
                 {% if user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">admin</a>
+                    <a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
                 </li>
                 {% endif %}
             </ul>
         </div>
-    {% endblock %}
     </nav>
+    {% endblock %}
 
     <div id="content">
-        {% block content %}
-        
-        {% endblock %}
+        {% block content %}{% endblock %}
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

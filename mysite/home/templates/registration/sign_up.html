@@ -14,15 +14,4 @@
 </div>
 {% endblock %}
 {% block scripts %}
-<script>
-    $(document).ready(function() {
-        $("#id_secundaria").change(function() {
-            if ($("#id_secundaria option:selected").val() == "True") {
-                $("#id_grado").attr("max", 3)
-            } else {
-                $("#id_grado").attr("max", 6)
-            }
-        })
-    })
-</script>
 {% endblock %}

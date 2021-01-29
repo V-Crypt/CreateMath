@@ -18,21 +18,11 @@ class UserCreationForm_custom(UserCreationForm):
     
 class StudentForm(forms.ModelForm):
     escuela = forms.CharField()
-    secundaria = forms.ChoiceField(choices=((False, "Primaria"), (True, "Secundaria")))
-    grado = forms.IntegerField(max_value=6)
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
 
     class Meta:
-        model = Student
-        fields = ("escuela", "secundaria", "grado")
-
-# class StudentRegistrationForm(forms.Form):
-#     escuela = forms.CharField()
-#     primaria_o_secundaria = forms.CharField()
-#     grado = forms.IntegerField(max_value=6)
-#     class Meta():
-#         model = Student
-#         fields = ('escuela', 'primaria_o_secundaria','grado')
+        model = Estudiante
+        fields = ("escuela", "grado")

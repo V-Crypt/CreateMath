@@ -21,6 +21,8 @@ def home(request):
             "actividades": actividades
         })
     else:
+        group = Group.objects.get(name="PUBLIC")
+        actividades = [group.actividad_set.all()]
         return render(request, "home/home.html", context={
             "actividades": [Actividad.objects.all()]
         })
@@ -44,7 +46,7 @@ def sign_up(request):
             student = studentForm.save(commit=False)
             student.user = user
             student.save()
-            grupo, b = Group.objects.get_or_create(name=GRUPO_POR_GRADO[student.grado])
+            grupo, b = Group.objects.get(name=GRUPO_POR_GRADO[student.grado])
             grupo.user_set.add(user)
             login(request,user)
             return redirect('home:home')

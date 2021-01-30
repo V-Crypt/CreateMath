@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="container">
     <div class="row">
@@ -34,7 +33,7 @@
                         <td>{{ act.nombre }}</td>
                         <td>{{ act.dura }}</td>
                         {% if user.is_authenticated %}
-                        <td>{{ act.link }}</td>
+                        <td><a href="{{ act.link }}">{{ act.link }}</a></td>
                         {% endif %}
                     </tr>
                     {% endfor %}{% endfor %}

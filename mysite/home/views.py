@@ -1,15 +1,30 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
-from .models import GRUPO_POR_GRADO
+from .models import GRUPO_POR_GRADO, Actividad
 from .forms import *
 # Create your views here.
-class Home(TemplateView):
+def home(request):
     template_name="home/home.html"
+    if request.user.is_authenticated:
+        actividades = list()
+        for group in request.user.groups.all():
+            actividades.append(
+                list(group.actividad_set.all())
+            )
+        
+        return render(request, template_name, context={
+            "actividades": actividades
+        })
+    else:
+        return render(request, "home/home.html", context={
+            "actividades": [Actividad.objects.all()]
+        })
+
 
 def log_user_out(request):
     logout(request)

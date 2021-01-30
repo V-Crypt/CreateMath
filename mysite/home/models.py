@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 # Create your models here.
 
 GRADOS = [
@@ -32,6 +32,7 @@ GRUPO_POR_GRADO = [
     "ESTUDIANTES 4"
     "ESTUDIANTES 4"
 ]
+
 class Estudiante(models.Model):
     """
     Modelo que representa al estudiante en la base de datos
@@ -46,3 +47,17 @@ class Estudiante(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name} de {self.escuela}"
+
+class Actividad(models.Model):
+    nombre = models.CharField(max_length=128)
+    tiempo = models.DateTimeField()
+    dura = models.DurationField()
+    link = models.URLField(default="www.google.com")
+    invitados = models.ManyToManyField(Group)
+    
+    class Meta:
+        verbose_name_plural = "Actividades"
+        ordering = ['tiempo']
+
+    def __str__(self):
+        return self.nombre

@@ -3,41 +3,44 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <h2>Información del evento y los horarios o así</h2>
+        <div class="col-6 col-sm-12">
+            <h2>Información del evento y los horarios o así</h2>
+        </div>
     </div>
     <div class="row">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">hora</th>
-                <th scope="col">nombre del evento</th>
-                <th scope="col">quien dirige</th>
-                <th scope="col">lugar</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for i in "012345678901234567890123456789"|make_list %}
-                <tr>
-                    <th scope="row">{{i}}</th>
-                    <td>discurso{{i}}</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">{{i}}</th>
-                    <td>discurso{{i}}+0.33</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">{{i}}</th>
-                    <td>discurso{{i}}.667</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-          </table>
+        {% if user.is_authenticated %}
+        <div class="col-6 col-sm-12">
+            <p>¡Hola, {{user.get_short_name}}! Aquí está tu agenda&#58;</p>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Duración</th>
+                    {% if user.is_authenticated %}
+                    <th scope="col">Link</th>
+                    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for act_set in actividades %}{% for act in act_set %}
+                    <tr>
+                        <th scope="row">{{ act.tiempo }}</th>
+                        <td>{{ act.nombre }}</td>
+                        <td>{{ act.dura }}</td>
+                        {% if user.is_authenticated %}
+                        <td>{{ act.link }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}{% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}

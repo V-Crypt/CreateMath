@@ -1,4 +1,5 @@
 venv
 mysite/db.sqlite3
-mysite/home/migrations/*_auto_*.py
-mysite/home/migrations/*initial.py
+mysite/home/migrations/*.py
+!mysite/home/migrations/__init__.py
+__pycache__/

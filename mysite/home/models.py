@@ -57,7 +57,7 @@ class Actividad(models.Model):
     
     class Meta:
         verbose_name_plural = "Actividades"
-        ordering = ['tiempo']
+        ordering = ['tiempo', 'nombre']
 
     def __str__(self):
         return self.nombre

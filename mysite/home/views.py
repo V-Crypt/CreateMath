@@ -21,10 +21,10 @@ def home(request):
             "actividades": actividades
         })
     else:
-        group = Group.objects.get(name="PUBLIC")
+        group = Group.objects.get(name="PUBLICO")
         actividades = [group.actividad_set.all()]
         return render(request, "home/home.html", context={
-            "actividades": [Actividad.objects.all()]
+            "actividades": actividades
         })
 
 

@@ -7,9 +7,33 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
 from .models import GRUPO_POR_GRADO, Actividad
 from .forms import *
+
 # Create your views here.
 def home(request):
-    template_name="home/home.html"
+    # TODO 
+    # Tarea 2
+    raise NotImplementedError
+
+def info(request):
+    template_name = "home/info.html"
+    # TODO
+    # TAREA 3
+    raise NotImplementedError
+
+def patrocinadores(request):
+    template_name = "home/patrocinadores.html"
+    # TODO
+    # TAREA 4
+    raise NotImplementedError
+
+def preparacion(request):
+    template_name = "home/preparacion.html"
+    # TODO
+    # TAREA 6
+    raise NotImplementedError
+
+def agenda(request):
+    template_name="home/agenda.html" # Remplazar cuando sepamos
     if request.user.is_authenticated:
         actividades = list()
         for group in request.user.groups.all():
@@ -26,7 +50,6 @@ def home(request):
         return render(request, "home/home.html", context={
             "actividades": actividades
         })
-
 
 def log_user_out(request):
     logout(request)

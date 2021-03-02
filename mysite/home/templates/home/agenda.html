@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-sm-12">
+            <h2>Información del evento y los horarios o así</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col-6 col-sm-12">
+            <p>¡Hola, {{user.get_short_name}}! Aquí está tu agenda&#58;</p>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Duración</th>
+                    {% if user.is_authenticated %}
+                    <th scope="col">Link</th>
+                    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for act_set in actividades %}{% for act in act_set %}
+                    <tr>
+                        <th scope="row">{{ act.tiempo }}</th>
+                        <td>{{ act.nombre }}</td>
+                        <td>{{ act.dura }}</td>
+                        {% if user.is_authenticated %}
+                        <td><a href="{{ act.link }}">Google</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}{% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

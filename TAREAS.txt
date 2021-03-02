@@ -1,0 +1,19 @@
+1-Añadir un footer al template base con las redes sociales
+
+2-Cambiar la página de inicio a una que sea una 
+landing page (de momento utilizaríamos placeholders 
+porque no tenemos diseño oficial aún)
+
+3-Añadir página de información general
+
+4-Añadir página de patrocinadores
+
+5-Añadir página para lookup de alumnos accesible solo a admins
+
+6-Añadir página para preparación
+
+7-Actualizar el navbar con las páginas añadidas
+
+8-Implementar sistema de pago (Ya que nos digan cómo o con qué sistema)
+
+* Cuando lleguen los diseños va a haber que impementarlos 

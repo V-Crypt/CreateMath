@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, ListView
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
-from .models import GRUPO_POR_GRADO, Actividad
+from .models import GRUPO_POR_GRADO, Actividad, Estudiante
 from .forms import *
 
 # Create your views here.
@@ -32,6 +32,25 @@ def preparacion(request):
     # TAREA 6
     raise NotImplementedError
 
+def lookup(request):
+    template_name="home/lookup.html"
+    if not request.user.is_staff:
+        return redirect("home:home")
+    if request.method == "POST":
+        try:
+            ctx = {
+                "estudiante": Estudiante.objects.get(matricula=request.POST["matricula"])
+            }
+        except Estudiante.DoesNotExist:
+            ctx = {
+                "estudiante": False,
+                "no_registrado": True
+            }
+        return render(request, template_name, ctx)
+    else:
+        return render(request, template_name)
+
+    
 def agenda(request):
     template_name="home/agenda.html" # Remplazar cuando sepamos
     if request.user.is_authenticated:
@@ -69,7 +88,7 @@ def sign_up(request):
             student = studentForm.save(commit=False)
             student.user = user
             student.save()
-            grupo, b = Group.objects.get(name=GRUPO_POR_GRADO[student.grado])
+            grupo, b = Group.objects.get_or_create(name=GRUPO_POR_GRADO[student.grado])
             grupo.user_set.add(user)
             login(request,user)
             return redirect('home:home')

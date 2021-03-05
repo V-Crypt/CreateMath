@@ -44,6 +44,7 @@ class Estudiante(models.Model):
         for i in range(9)
     ])
     estatus_de_inscripcion = models.IntegerField(default=0)
+    matricula = models.CharField(max_length=32, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.first_name} de {self.escuela}"
